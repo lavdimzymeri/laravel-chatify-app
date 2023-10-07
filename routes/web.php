@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCoinRequestController;
 use App\Http\Controllers\Chatify\ChatifyController;
+use App\Http\Controllers\CoinRequestController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\LanguageController;
 use App\Http\Controllers\Dashboard\PermissionController;
@@ -62,16 +64,23 @@ Route::middleware(['splade'])->group(function () {
             Route::put('/update', [SettingController::class, 'update'])->name('update');
         });
 
-        Route::prefix('plugins')->name('plugins.')->group(function(){
-            Route::get('/',[PluginController::class,'index'])->name('index');
-            Route::get('/install',[PluginController::class,'create'])->name('create');
-            Route::post('/install',[PluginController::class,'store'])->name('store');
-            Route::post('/{plugin}/activate',[PluginController::class,'activate'])->name('activate');
-            Route::post('/{plugin}/deactivate',[PluginController::class,'deactivate'])->name('deactivate');
-            Route::post('/{plugin}/delete',[PluginController::class,'delete'])->name('delete');
+        Route::prefix('plugins')->name('plugins.')->group(function () {
+            Route::get('/', [PluginController::class, 'index'])->name('index');
+            Route::get('/install', [PluginController::class, 'create'])->name('create');
+            Route::post('/install', [PluginController::class, 'store'])->name('store');
+            Route::post('/{plugin}/activate', [PluginController::class, 'activate'])->name('activate');
+            Route::post('/{plugin}/deactivate', [PluginController::class, 'deactivate'])->name('deactivate');
+            Route::post('/{plugin}/delete', [PluginController::class, 'delete'])->name('delete');
         });
     });
 });
 Route::middleware('auth')->group(function () {
-    Route::get('/count/messages',[ChatifyController::class,'count'])->name('chatify');
+    Route::get('/count/messages', [ChatifyController::class, 'count'])->name('chatify');
 });
+// User Coin Request Routes
+Route::get('/request-coins',  [CoinRequestController::class, 'showRequestForm'])->name('request.coins.form');
+Route::post('/request-coins',  [CoinRequestController::class, 'submitRequest'])->name('request.coins.submit');
+
+Route::get('/admin/coin-requests', [AdminCoinRequestController::class, 'index'])->name('admin.coin.requests');
+Route::post('/admin/coin-requests/approve/{id}',  [AdminCoinRequestController::class, 'approveRequest'])->name('admin.coin.approve');
+Route::post('/admin/coin-requests/cancel/{id}',  [AdminCoinRequestController::class, 'cancelRequest'])->name('admin.coin.cancel');

@@ -98,6 +98,18 @@
                     <span class="mx-2 text-sm font-medium">@lang('main.settings')</span>
                 </Link>
             @endcan
+
+            {{-- Coin Request --}}
+                <a href="{{ route('request.coins.form') }}" class="{{ request()->routeIs('request.coins.form') ? 'bg-indigo-50 dark:bg-indigo-400 text-gray-700 dark:text-white font-semibold' : '' }} text-sm py-3 my-0 mx-2 flex items-center whitespace-nowrap px-4 font-medium text-gray-500 dark:text-white hover:bg-indigo-50 dark:hover:bg-indigo-400 rounded-lg shadow-none transition-colors ease-in-out">
+                    <i class="fa-solid fa-coins"></i>
+                    <span class="mx-2 text-sm">@lang('main.request_coins')</span>
+                </a>
+
+            {{-- Admin Coin Requests --}}
+                <a href="{{ route('admin.coin.requests') }}" class="{{ request()->routeIs('admin.coin.requests') ? 'bg-indigo-50 dark:bg-indigo-400 text-gray-700 dark:text-white font-semibold' : '' }} text-sm py-3 my-0 mx-2 flex items-center whitespace-nowrap px-4 font-medium text-gray-500 dark:text-white hover:bg-indigo-50 dark:hover:bg-indigo-400 rounded-lg shadow-none transition-colors ease-in-out">
+                    <i class="fa-solid fa-coins"></i>
+                    <span class="mx-2 text-sm">@lang('main.admin_coin_requests')</span>
+                </a>
         </nav>
     </div>
 </aside>
