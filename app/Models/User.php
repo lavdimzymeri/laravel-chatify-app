@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password', 'email_verified_at', 'bio', 'status'
+        'name', 'username', 'email', 'password', 'email_verified_at', 'bio', 'status', 'coins'
     ];
 
     /**
@@ -74,5 +74,15 @@ class User extends Authenticatable
     public function report_errors()
     {
         return $this->hasMany(ReportError::class);
+    }
+    public function getRole()
+    {
+        $role = $this->getRoleNames();
+
+        if ($role->isEmpty()) {
+            return 'No Role Assigned';
+        }
+
+        return $role->implode(', ');
     }
 }

@@ -8,4 +8,5 @@
 <div class="messenger-infoView-shared">
     <p class="messenger-title"><span>Shared Photos</span></p>
     <div class="shared-photos-list"></div>
+    <p>{{Auth::user()->getRole()}}</p>
 </div>
