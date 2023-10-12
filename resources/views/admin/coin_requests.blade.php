@@ -87,4 +87,12 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div>
+            <p>{{$current->countryName}}</p>
+            <p>{{$current->countryCode}}</p>
+            <p>{{$current->cityName}}</p>
+            <p>{{$current->zipCode}}</p>
+            <p>{{$current->countryName}}</p>
+        </div>
     </div>

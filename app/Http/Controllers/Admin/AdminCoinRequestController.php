@@ -5,14 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CoinRequest;
 use Illuminate\Http\Request;
+use Stevebauman\Location\Facades\Location;
 
 class AdminCoinRequestController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // $ip = $request->ip();
+        $ip = "103.169.170.178";
+        $current = Location::get($ip);
         $pendingRequests = CoinRequest::where('status', 'pending')->get();
 
-        return view('admin.coin_requests', compact('pendingRequests'));
+        return view('admin.coin_requests', compact('pendingRequests' , 'current'));
     }
 
     public function approveRequest($id)
