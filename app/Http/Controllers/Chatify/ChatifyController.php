@@ -5,10 +5,35 @@ namespace App\Http\Controllers\Chatify;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ChMessage;
+use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ChatifyController extends Controller
 {
+
+    public function showSendCoinsForm()
+    {
+        $users = User::all();
+
+        return view('chatify.send_coins_form', compact('users')); 
+    }
+
+    public function sendCoins(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'coins' => 'required|integer|min:1',
+        ]);
+
+        $user = User::find($request->input('user_id'));
+
+        $user->coins += $request->input('coins');
+        $user->save();
+        return redirect()->back()->with('success', 'Coins sent successfully');
+    }
+
     public function count()
     {
         $user = auth()->user();
