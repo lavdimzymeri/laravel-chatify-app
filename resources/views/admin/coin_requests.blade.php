@@ -2,8 +2,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background: rgb(63, 94, 251);
+            background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
             padding: 20px;
+            min-height: 100vh;
+            width: 100%;
+            margin: 100px 0 0 0;
+            padding-left: 0;
         }
 
         .container {
@@ -49,8 +54,9 @@
             margin-right: 5px;
         }
     </style>
+    @include('components-project.navbar')
     <div class="container">
-        <h2>Pending Coin Requests - Admin</h2>
+        <h2 style="color: #fff" >Pending Coin Requests - Admin</h2>
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -88,11 +94,11 @@
             </tbody>
         </table>
 
-        <div>
+        {{-- <div>
             <p>{{$current->countryName}}</p>
             <p>{{$current->countryCode}}</p>
             <p>{{$current->cityName}}</p>
             <p>{{$current->zipCode}}</p>
             <p>{{$current->countryName}}</p>
-        </div>
+        </div> --}}
     </div>

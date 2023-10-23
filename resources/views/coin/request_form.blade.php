@@ -1,8 +1,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
+            margin-top: 100px;
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background: rgb(63, 94, 251);
+            background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
             padding: 20px;
         }
 
@@ -56,6 +58,7 @@
             background-color: #0056b3;
         }
     </style>
+    @include('components-project.navbar')
     <div class="container">
         <h2>Coin Request Form</h2>
 

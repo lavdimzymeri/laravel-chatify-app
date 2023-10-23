@@ -13,11 +13,14 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\TrafficsController;
 use App\Http\Controllers\FindFriendsController;
 use App\Http\Controllers\PaymentPacksController;
+use App\Http\Controllers\PayPalController;
 use App\Models\Language;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\PlanController;
+
 
 Route::middleware(['splade'])->group(function () {
     Route::spladeWithVueBridge();
@@ -87,4 +90,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/find/friends/page',  [FindFriendsController::class, 'index'])->name('user.find.friends');
     Route::get('/payment/packs',  [PaymentPacksController::class, 'index'])->name('payment.packs');
+});
+
+Route::middleware("auth")->group(function () {
+    Route::get('plans', [PlanController::class, 'index']);
+    Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
+    Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+
+    Route::post('paypal/payment', [PaypalController::class, 'payment'])->name('paypal');
+    Route::get('paypal/success', [PaypalController::class, 'success'])->name('paypal_success');
+    Route::get('paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal_cancel');
 });

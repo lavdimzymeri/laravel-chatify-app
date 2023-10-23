@@ -1,6 +1,20 @@
     <style>
-        body{
+        body {
+            padding-top: 90px !important;
             background-color: black;
+        }
+
+        #toggleChat {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #toggleChat:hover {
+            background-color: #0056b3;
         }
     </style>
     @include('components-project.navbar')
@@ -124,13 +138,27 @@
         </div>
     @else
         <div class="messenger" style="background-color: white">
-            <div style="width: 50%; display: inline-block; margin-top:100px;">
-                <p>This is the other half of the page. Add your paragraph content here.<button id="toggleChat">Toggle
-                        Chat</button>
-                </p>
+            <div style="width: 70%; display: inline-block; margin: 20px; padding: 20px; background-color: #f7f7f7; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+                <button id="toggleChat" class="btn btn-primary" style="display: block; margin-bottom: 20px; padding: 10px 20px; background-color: #007BFF; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Chat</button>
+                <div>
+                    <h2 style="font-size: 24px; margin-bottom: 20px; color: #333;">Welcome to Our Chat Dating App</h2>
+                    <p style="font-size: 16px; line-height: 1.5; color: #666;">Discover the perfect match and build meaningful connections with our innovative chat dating app. Whether you're looking for romance, friendship, or casual conversations, we've got you covered.</p>
+            
+                    <h2 style="font-size: 20px; margin: 20px 0; color: #333;">Key Features</h2>
+                    <ul style="font-size: 16px; line-height: 1.5; color: #666;">
+                        <li>Instant Messaging: Connect with potential partners through real-time messaging.</li>
+                        <li>Profile Matching: Find your ideal match based on shared interests and preferences.</li>
+                        <li>Video Calls: Take your conversations to the next level with video calls and face-to-face interactions.</li>
+                        <li>Safe and Secure: We prioritize your privacy and security, ensuring a safe dating environment.</li>
+                    </ul>
+            
+                    <h2 style="font-size: 20px; margin: 20px 0; color: #333;">Get Started Today</h2>
+                    <p style="font-size: 16px; line-height: 1.5; color: #666;">Join our vibrant community and start your journey to finding love and meaningful connections. Sign up now and explore the endless possibilities of our chat dating app.</p>
+                </div>
             </div>
-            <div style="width: 50%; display: inline-block; text-align: center;">
-                <div class="messenger" id="chatContainer" style="display: none;">
+            
+            <div style="width: 30%; display: inline-block; text-align: center;">
+                <div class="messenger" id="chatContainer">
                     {{-- ----------------------Users/Groups lists side---------------------- --}}
                     <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
                         {{-- Header and search bar --}}

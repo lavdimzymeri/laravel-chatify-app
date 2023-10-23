@@ -7,14 +7,16 @@
             </div>
             <div class="footer-links" style="margin-right: 20px;">
                 <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="display: inline; margin-right: 20px;"><a href="#"
+                    <li style="display: inline; margin-right: 20px;"><a href="{{ url('/') }}"
                             style="text-decoration: none; color: #fff; font-size:20px;">Home</a></li>
-                    <li style="display: inline; margin-right: 20px;"><a href="#"
-                            style="text-decoration: none; color: #fff; font-size:20px;">About Us</a></li>
-                    <li style="display: inline; margin-right: 20px;"><a href="#"
-                            style="text-decoration: none; color: #fff; font-size:20px;">Contact</a></li>
-                    <li style="display: inline;"><a href="#"
-                            style="text-decoration: none; color: #fff;font-size:20px;">Privacy Policy</a></li>
+                    <li style="display: inline; margin-right: 20px;"><a href="{{ url('/dashboard') }}"
+                            style="text-decoration: none; color: #fff; font-size:20px;">Profile</a></li>
+                    <li style="display: inline; margin-right: 20px;"><a href="{{ route('chatify') }}"
+                            style="text-decoration: none; color: #fff; font-size:20px;">Chat Now</a></li>
+                    <li style="display: inline;"><a href="{{ route('user.find.friends') }}"
+                            style="text-decoration: none; color: #fff;font-size:20px;">Find Friends</a></li>
+                    <li style="display: inline;margin-left: 20px;"><a href="{{ route('payment.packs') }}"
+                            style="text-decoration: none; color: #fff;font-size:20px;">Coins</a></li>
                 </ul>
             </div>
         </div>
