@@ -1,15 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        margin-top: 100px;
-        background: rgb(63, 94, 251);
-        background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
-    }
-
     .container {
         display: flex;
         flex-wrap: wrap;
@@ -17,9 +7,17 @@
     }
 
     .user-card {
-        width: calc(15% - 16px);
-        margin: 8px;
+        width: calc(20% - 0px);
+        margin: 18px;
         perspective: 1000px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+
+    .user-card:hover {
+        transform: translateY(-10px);
     }
 
     .user-card-inner {
@@ -48,39 +46,51 @@
     }
 
     .front {
-        background: rgb(70, 68, 68);
-        background: linear-gradient(0deg, rgba(70, 68, 68, 1) 0%, rgba(45, 0, 0, 1) 46%, rgba(70, 68, 68, 1) 100%);
+        background: #3498db;
+        /* Change to your preferred background color */
         border-radius: 15px;
         color: white;
     }
 
     .back {
-        background: rgb(70, 68, 68);
-        background: linear-gradient(0deg, rgba(70, 68, 68, 1) 0%, rgba(45, 0, 0, 1) 46%, rgba(70, 68, 68, 1) 100%);
+        background: rgb(63, 94, 251);
+        background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+        /* Change to your preferred background color */
         border-radius: 15px;
         color: white;
         transform: rotateY(180deg);
     }
 
     .user-card img {
-        max-width: 82%;
+        max-width: 100%;
+        height: 200px;
+        /* Adjust the height as needed */
         border-radius: 10px;
     }
 
-    .user-card h5,
-    .user-card p {
-        font-size: 14px;
+    .user-card h2,
+    .user-card h3 {
+        font-size: 18px;
+        margin: 5px 0;
     }
 
     .chat-btn {
-        background-color: transparent;
-        padding: 25px;
-        color: blue;
+        background: rgb(63, 94, 251);
+        /* Change to your preferred button color */
+        padding: 10px 20px;
+        color: white;
         text-decoration: none;
-        font-size: 25px;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
     }
 
-    @media (min-width: 768px) and (max-width: 992px) {
+    .chat-btn:hover {
+        background-color: #27ae60;
+        /* Change to the hover color */
+    }
+
+    @media (max-width: 1200px) {
         .user-card {
             width: calc(33.33% - 16px);
         }
@@ -123,26 +133,25 @@
     .active {
         text-decoration: none;
         color: white;
-        background-color: #fff;
+        background-color: #3498db;
+        /* Change to your preferred active color */
         padding: 10px;
-        color: red;
         border-radius: 5px;
         transition: background-color 0.3s;
     }
 
     .pagination a {
         text-decoration: none;
-        color: white;
-        background-color: #fff;
+        color: #3498db;
+        /* Change to your preferred text color */
         padding: 10px;
-        color: red;
         border-radius: 5px;
         transition: background-color 0.3s;
     }
 
     .pagination a:hover {
-        background-color: #fff;
-        color: blue;
+        background-color: #f2f2f2;
+        /* Change to the hover background color */
     }
 
     .pagination .pagination-previous,
@@ -154,10 +163,13 @@
         width: 15px;
     }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-@include('components-project.navbar')
+
 <div class="container">
-    @foreach ($users as $user)
+    @php
+        $tests = App\Models\User::all();
+        $tests = App\Models\User::paginate(25);
+    @endphp
+    @foreach ($tests as $user)
         <div class="user-card">
             <div class="user-card-inner">
                 <div class="front">
@@ -181,4 +193,3 @@
 <div class="pagination">
     {{ $users->links() }}
 </div>
-@include('components-project.footer')

@@ -16,11 +16,28 @@
         #toggleChat:hover {
             background-color: #0056b3;
         }
+
+        div::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        div::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        div::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 5px;
+        }
+
+        div::-webkit-scrollbar-thumb:hover {
+            background: #2076d8;
+        }
     </style>
     @include('components-project.navbar')
     @include('Chatify::layouts.headLinks')
     @if (Auth::user()->getRole() == 'moderator' || Auth::user()->getRole() == 'super-admin')
-        <div class="messenger" style="margin-top: 80px; background-color:black;">
+        <div class="messenger" style="margin-top: 0px; background-color:black;">
             {{-- ----------------------Users/Groups lists side---------------------- --}}
             <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
                 {{-- Header and search bar --}}
@@ -137,27 +154,16 @@
             </div>
         </div>
     @else
-        <div class="messenger" style="background-color: white">
-            <div style="width: 70%; display: inline-block; margin: 20px; padding: 20px; background-color: #f7f7f7; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
-                <button id="toggleChat" class="btn btn-primary" style="display: block; margin-bottom: 20px; padding: 10px 20px; background-color: #007BFF; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Chat</button>
-                <div>
-                    <h2 style="font-size: 24px; margin-bottom: 20px; color: #333;">Welcome to Our Chat Dating App</h2>
-                    <p style="font-size: 16px; line-height: 1.5; color: #666;">Discover the perfect match and build meaningful connections with our innovative chat dating app. Whether you're looking for romance, friendship, or casual conversations, we've got you covered.</p>
-            
-                    <h2 style="font-size: 20px; margin: 20px 0; color: #333;">Key Features</h2>
-                    <ul style="font-size: 16px; line-height: 1.5; color: #666;">
-                        <li>Instant Messaging: Connect with potential partners through real-time messaging.</li>
-                        <li>Profile Matching: Find your ideal match based on shared interests and preferences.</li>
-                        <li>Video Calls: Take your conversations to the next level with video calls and face-to-face interactions.</li>
-                        <li>Safe and Secure: We prioritize your privacy and security, ensuring a safe dating environment.</li>
-                    </ul>
-            
-                    <h2 style="font-size: 20px; margin: 20px 0; color: #333;">Get Started Today</h2>
-                    <p style="font-size: 16px; line-height: 1.5; color: #666;">Join our vibrant community and start your journey to finding love and meaningful connections. Sign up now and explore the endless possibilities of our chat dating app.</p>
+        <div class="messenger" style="background-color: #007BFF;overflow: hidden;">
+            <div
+                style="width: 60%; display: inline-block; margin: 20px; padding: 20px; background: rgb(63, 94, 251); background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%); border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                <div style="width: 100%; height: 100%; overflow: auto; margin-right: -20px; padding-right: 20px;">
+                    <button id="toggleChat" class="btn btn-primary"
+                        style="display: block; margin-bottom: 20px; padding: 10px 20px; background-color: #007BFF; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Chat</button>
+                    @include('user.profiles')
                 </div>
             </div>
-            
-            <div style="width: 30%; display: inline-block; text-align: center;">
+            <div style="width: 40%; display: inline-block; text-align: center;">
                 <div class="messenger" id="chatContainer">
                     {{-- ----------------------Users/Groups lists side---------------------- --}}
                     <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
@@ -278,7 +284,6 @@
             </div>
         </div>
     @endif
-    @include('components-project.footer')
     <script>
         document.getElementById("toggleChat").addEventListener("click", function() {
             var chatContainer = document.getElementById("chatContainer");
@@ -291,3 +296,4 @@
     </script>
     @include('Chatify::layouts.modals')
     @include('Chatify::layouts.footerLinks')
+    @include('components-project.footer')

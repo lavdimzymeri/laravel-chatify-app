@@ -81,14 +81,13 @@ Route::middleware(['splade'])->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::get('/count/messages', [ChatifyController::class, 'count'])->name('count-messages');
-    Route::get('/request-coins',  [CoinRequestController::class, 'showRequestForm'])->name('request.coins.form');
-    Route::post('/request-coins',  [CoinRequestController::class, 'submitRequest'])->name('request.coins.submit');
 
     Route::get('/admin/coin-requests', [AdminCoinRequestController::class, 'index'])->name('admin.coin.requests');
     Route::post('/admin/coin-requests/approve/{id}',  [AdminCoinRequestController::class, 'approveRequest'])->name('admin.coin.approve');
     Route::post('/admin/coin-requests/cancel/{id}',  [AdminCoinRequestController::class, 'cancelRequest'])->name('admin.coin.cancel');
 
     Route::get('/user/find/friends/page',  [FindFriendsController::class, 'index'])->name('user.find.friends');
+    Route::get('/user/profiles',  [FindFriendsController::class, 'profiles'])->name('user.profiles');
     Route::get('/payment/packs',  [PaymentPacksController::class, 'index'])->name('payment.packs');
 });
 

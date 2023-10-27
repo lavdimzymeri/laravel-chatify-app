@@ -42,11 +42,15 @@ class MessagesController extends Controller
      */
     public function index( $id = null)
     {
+        $users = User::all();
+        $users = User::paginate(30);
+        
         $messenger_color = Auth::user()->messenger_color;
         return view('Chatify::pages.app', [
             'id' => $id ?? 0,
             'messengerColor' => $messenger_color ? $messenger_color : Chatify::getFallbackColor(),
             'dark_mode' => Auth::user()->dark_mode < 1 ? 'light' : 'dark',
+            'users' => $users
         ]);
     }
 
@@ -110,7 +114,7 @@ class MessagesController extends Controller
             return redirect()->route('dashboard')->with('error', "You don't have enough coins to send a message. An alert has been shown instead.");
 
         }
-        $user->decrement('coins', 1);
+        $user->decrement('coins', 7);
 
         // if there is attachment [file]
         if ($request->hasFile('file')) {

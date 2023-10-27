@@ -18,23 +18,23 @@
             <!-- Profile Photo -->
             @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
                 <div class="col-span-6 sm:col-span-4">
-                    <span class="block mb-1 text-gray-700 font-sans">{{ __('Photo') }}</span>
+                    {{-- <span class="block mb-1 text-gray-700 font-sans">{{ __('Photo') }}</span> --}}
 
                     <!-- Current Profile Photo -->
-                    <div v-show="!form.photo" class="mt-2">
+                    {{-- <div v-show="!form.photo" class="mt-2">
                         <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" class="rounded-full h-20 w-20 object-cover">
-                    </div>
+                    </div> --}}
 
                     <!-- New Profile Photo Preview -->
-                    <div v-show="form.photo" class="mt-2">
+                    {{-- <div v-show="form.photo" class="mt-2">
                         <span
                             class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
                             :style="'background-image: url(\'' + form.$fileAsUrl('photo') + '\');'"
                         />
-                    </div>
+                    </div> --}}
 
                     <!-- Profile Photo File Input -->
-                    <div class="flex mt-2 space-x-2">
+                    {{-- <div class="flex mt-2 space-x-2">
                         <x-splade-file name="photo" :show-filename="false">
                             {{ __('Select A New Photo') }}
                         </x-splade-file>
@@ -46,7 +46,7 @@
                                 </x-splade-link>
                             @endif
                         </x-splade-rehydrate>
-                    </div>
+                    </div> --}}
                 </div>
             @endif
 

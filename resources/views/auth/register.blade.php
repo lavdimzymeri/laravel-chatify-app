@@ -5,10 +5,13 @@
     <x-splade-form class="space-y-4">
         <x-splade-input id="name" name="name" :label="__('main.name')" required autofocus />
         <x-splade-input id="username" name="username" :label="__('main.username')" required />
-        <x-splade-input id="username" name="username" :label="__('main.username')" required />
-        <x-splade-input id="username" name="username" :label="__('main.username')" required />
-        <x-splade-input id="username" name="username" :label="__('main.username')" required />
-        <x-splade-input id="username" name="username" :label="__('main.username')" required />
+        <x-splade-input id="address" name="address" :label="__('Address')" required />
+        <x-splade-select id="gender" name="gender" :label="__('Gender')" required autofocus>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </x-splade-select>
+        <x-splade-input id="state" name="state" :label="__('State')" required />
+        <x-splade-input id="phone_number" name="phone_number" :label="__('Tel.')" required />
         <x-splade-input id="email" name="email" type="email" :label="__('main.email')" required />
         <x-splade-input id="password" name="password" type="password" :label="__('main.password')" required
             autocomplete="new-password" />
