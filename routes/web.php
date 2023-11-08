@@ -87,6 +87,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/coin-requests/cancel/{id}',  [AdminCoinRequestController::class, 'cancelRequest'])->name('admin.coin.cancel');
 
     Route::get('/user/find/friends/page',  [FindFriendsController::class, 'index'])->name('user.find.friends');
+    Route::get('/user/find/friends/profiles',  [FindFriendsController::class, 'profilesModerator'])->name('profilesModerator');
+    Route::get('/users/login/{user}', [FindFriendsController::class, 'loginAsUser'])->name('loginAsUser');
+    Route::get('/user/find/friends/page/search',  [FindFriendsController::class, 'search'])->name('user.find.friends.search');
     Route::get('/user/profiles',  [FindFriendsController::class, 'profiles'])->name('user.profiles');
     Route::get('/payment/packs',  [PaymentPacksController::class, 'index'])->name('payment.packs');
 });

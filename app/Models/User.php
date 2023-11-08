@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(RateLimitDetail::class, 'user_id');
     }
 
+    public function profiles()
+    {
+        return $this->hasMany(Profiles::class);
+    }
+
     public function report_errors()
     {
         return $this->hasMany(ReportError::class);

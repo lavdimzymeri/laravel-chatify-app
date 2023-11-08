@@ -1,111 +1,63 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
     body {
-        margin-top: 100px;
-        background: rgb(63, 94, 251);
-        background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
-    }
-
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        padding-top: 90px !important;
+        background: linear-gradient(135deg, #ff00cc, #3333ff);
     }
 
     .user-card {
-        width: calc(15% - 16px);
-        margin: 8px;
-        perspective: 1000px;
-    }
-
-    .user-card-inner {
+        margin: 20px !important;
         width: 100%;
-        height: 0;
-        padding-bottom: 100%;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: transform 1.0s;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
+        transition: transform 0.3s;
+
     }
 
-    .user-card:hover .user-card-inner {
-        transform: rotateY(180deg);
-    }
-
-    .front,
-    .back {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        backface-visibility: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .front {
-        background: rgb(70, 68, 68);
-        background: linear-gradient(0deg, rgba(70, 68, 68, 1) 0%, rgba(45, 0, 0, 1) 46%, rgba(70, 68, 68, 1) 100%);
-        border-radius: 15px;
-        color: white;
-    }
-
-    .back {
-        background: rgb(70, 68, 68);
-        background: linear-gradient(0deg, rgba(70, 68, 68, 1) 0%, rgba(45, 0, 0, 1) 46%, rgba(70, 68, 68, 1) 100%);
-        border-radius: 15px;
-        color: white;
-        transform: rotateY(180deg);
+    .user-card:hover {
+        transform: translateY(-5px);
     }
 
     .user-card img {
-        max-width: 82%;
-        border-radius: 10px;
+        max-width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
     }
 
-    .user-card h5,
-    .user-card p {
-        font-size: 14px;
+    .user-card-content {
+        padding: 20px;
+    }
+
+    .user-card h2,
+    .user-card h3 {
+        font-size: 18px;
     }
 
     .chat-btn {
         background-color: transparent;
-        padding: 25px;
-        color: blue;
+        padding: 10px 20px;
+        border: 1px solid #3333ff;
+        color: #3333ff;
         text-decoration: none;
-        font-size: 25px;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+        display: inline-block;
     }
 
-    @media (min-width: 768px) and (max-width: 992px) {
-        .user-card {
-            width: calc(33.33% - 16px);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .user-card {
-            width: calc(50% - 16px);
-        }
-
-        .user-card img {
-            height: auto;
-        }
+    .chat-btn:hover {
+        background-color: #3333ff;
+        color: #fff;
     }
 
     .pagination {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         margin: 20px 0;
         width: 100%;
-    }
-
-    .pagination p {
-        display: none;
     }
 
     .pagination ul {
@@ -122,27 +74,25 @@
 
     .active {
         text-decoration: none;
-        color: white;
-        background-color: #fff;
+        color: #fff;
+        background-color: #3333ff;
         padding: 10px;
-        color: red;
         border-radius: 5px;
         transition: background-color 0.3s;
     }
 
     .pagination a {
         text-decoration: none;
-        color: white;
+        color: #3333ff;
         background-color: #fff;
         padding: 10px;
-        color: red;
         border-radius: 5px;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, color 0.3s;
     }
 
     .pagination a:hover {
-        background-color: #fff;
-        color: blue;
+        background-color: #3333ff;
+        color: #fff;
     }
 
     .pagination .pagination-previous,
@@ -154,29 +104,32 @@
         width: 15px;
     }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 @include('components-project.navbar')
 <div class="container">
-    @foreach ($users as $user)
-        <div class="user-card">
-            <div class="user-card-inner">
-                <div class="front">
-                    <img src="{{ $user->avatar ? asset('storage/users-avatar/' . $user->avatar) : asset('storage/users-avatar/avatar.png') }}"
-                        alt="User Image">
-                    <h2>{{ $user->name }}</h2>
-                    <h3>{{ $user->username }}</h3>
+    <div class="row">
+        @if ($users->count() > 0)
+            @foreach ($users as $user)
+                <div class="col-md-4">
+                    <div class="user-card">
+                        <img src="{{ $user->avatar ? asset('storage/users-avatar/' . $user->avatar) : asset('storage/users-avatar/avatar.png') }}"
+                            alt="User Image">
+                        <div class="user-card-content">
+                            <h2>{{ $user->name }}</h2>
+                            <h3>{{ $user->username }}</h3>
+                            <p>{{ $user->bio }}</p>
+                            <a href="{{ url('chatify', ['id' => $user->id]) }}" class="chat-btn">
+                                <i class="fas fa-comment"></i> Chat
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="back">
-                    <h2>{{ $user->name }}</h2>
-                    <h3>{{ $user->username }}</h3>
-                    <a href="{{ url('chatify', ['id' => $user->id]) }}" class="chat-btn">
-                        <i class="fas fa-comment"></i> Chat
-                    </a>
-                    <p>{{ $user->bio }}</p>
-                </div>
+            @endforeach
+        @else
+            <div class="col-md-12 text-center">
+                <h2>No users found</h2>
             </div>
-        </div>
-    @endforeach
+        @endif
+    </div>
 </div>
 <div class="pagination">
     {{ $users->links() }}

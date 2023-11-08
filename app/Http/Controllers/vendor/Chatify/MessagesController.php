@@ -110,7 +110,7 @@ class MessagesController extends Controller
         $user = Auth::user();
 
         if ($user->coins < 1) {
-            // Return a response indicating the alert
+// Return a response indicating the alert
             return redirect()->route('dashboard')->with('error', "You don't have enough coins to send a message. An alert has been shown instead.");
 
         }
@@ -157,7 +157,7 @@ class MessagesController extends Controller
                 Chatify::push("private-chatify.".$request['id'], 'messaging', [
                     'from_id' => Auth::user()->id,
                     'to_id' => $request['id'],
-                    'message' => Chatify::messageCard($messageData, false)
+                    'message' => Chatify::messageCard($messageData, true)
                 ]);
             }
         }
@@ -169,7 +169,6 @@ class MessagesController extends Controller
             'message' => Chatify::messageCard(@$messageData),
             'tempID' => $request['temporaryMsgId'],
         ]);
-        // dd(Auth::user()->coins);
     }
 
     /**
