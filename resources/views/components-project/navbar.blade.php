@@ -70,17 +70,16 @@
                         <a href="{{ url('/') }}"
                             style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">Home</a>
                         <a href="{{ url('/user/profile') }}"
-                            style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">Profile</a>
+                            style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">Settings</a>
                         <a href="{{ route('chatify') }}"
-                            style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">Chat Now</a>
+                            style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">Chat</a>
                         <a href="{{ route('user.find.friends') }}"
-                            style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">Find
-                            Friends</a>
-                            @if (Auth::user()->getRole() == 'moderator' || Auth::user()->getRole() == 'super-admin')
-                        <a href="{{ route('profilesModerator') }}"
-                            style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">
-                            My Profiles</a>
-                            @endif
+                            style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">Profiles</a>
+                        @if (Auth::user()->getRole() == 'moderator' || Auth::user()->getRole() == 'super-admin')
+                            <a href="{{ route('profilesModerator') }}"
+                                style="color: black; text-decoration: none; margin: 0 10px; font-size: 20px;">
+                                My Profiles</a>
+                        @endif
                     </div>
                     <div class="navbar-nav ms-auto">
                         <form method="GET" action="{{ route('user.find.friends.search') }}"

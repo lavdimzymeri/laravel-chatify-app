@@ -62,7 +62,7 @@ class PaypalController extends Controller
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
             CoinRequest::create([
-                'coins_requested' => $price,
+                'coins_requested' => $price * 10,
                 'user_id' => Auth::user()->id,
             ]);
             return "Payment is successful!";

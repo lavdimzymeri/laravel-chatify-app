@@ -11,10 +11,23 @@ class FindFriendsController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        $users = User::paginate(30);
-        $users = User::orderBy('gender', 'desc')->paginate(15);
-
+        $allUsers = User::all();
+        $filteredUsers = $allUsers->filter(function ($user) {
+            return $user->getRole() == 'moderator';
+        });
+    
+        $currentPage = \Illuminate\Pagination\Paginator::resolveCurrentPage();
+        $perPage = 30;
+        $currentPageItems = $filteredUsers->slice(($currentPage - 1) * $perPage, $perPage)->all();
+    
+        $users = new \Illuminate\Pagination\LengthAwarePaginator(
+            $currentPageItems,
+            count($filteredUsers),
+            $perPage,
+            $currentPage,
+            ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
+        );
+    
         return view('user.findFriends', compact('users'));
     }
 

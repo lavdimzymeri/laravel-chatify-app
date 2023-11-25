@@ -13,7 +13,6 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         background-color: #fff;
         transition: transform 0.3s;
-
     }
 
     .user-card:hover {
@@ -21,7 +20,9 @@
     }
 
     .user-card img {
-        max-width: 100%;
+        min-width: 100%;
+        height: 200px; /* Set a fixed height for the images */
+        object-fit: cover; /* Ensure the image covers the specified dimensions */
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
     }

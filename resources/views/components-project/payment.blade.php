@@ -44,60 +44,80 @@
             background-color: #0056b3;
         }
     </style>
-</head>
+    </head>
 
-<body>
-    @include('components-project.navbar')
-    <div class="container">
-        <div class="coin-card">
-            <p>Coins Package 1</p>
-            <p>100 Coins</p>
-            <img src="{{ asset('assets/imgs/coins.png') }}" alt="Profile Image" />
-            <p>Get started with 100 coins and unlock amazing features!</p>
-            <p>Price: $5.99</p>
-            <form action="{{ route('paypal') }}" method="post">
-                @csrf
-                <input type="hidden" name="price" value="5.99" />
-                <button type="submit">Pay with Paypal</button>
-            </form>
-        </div>
+    <body>
+        @include('components-project.navbar')
+        <div class="container">
+            <div class="coin-card">
+                <p>Coins Package 1</p>
+                <p>100 Coins</p>
+                <img src="{{ asset('assets/imgs/coins.png') }}" alt="Profile Image" />
+                <p>Get started with 100 coins and unlock amazing features!</p>
+                <p>Price: $5.99</p>
+                <form action="{{ route('paypal') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="price" value="5.99" />
+                    <button type="submit">Pay with Paypal</button>
+                </form>
+                <form action="{{ route('stripe') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="price" value="5.99" />
+                    <button type="submit">Pay With Stripe</button>
+                </form>
+            </div>
 
-        <div class="coin-card">
-            <p>Coins Package 2</p>
-            <p>250 Coins</p>
-            <img src="{{ asset('assets/imgs/coins.png') }}" alt="Profile Image" />
-            <p>Enjoy 250 coins and enhance your experience!</p>
-            <p>Price: $12.99</p>
-            <form action="{{ route('paypal') }}" method="post">
-                @csrf
-                <input type="hidden" name="price" value="12.99" />
-                <button type="submit">Pay with Paypal</button>
-            </form>
-        </div>
+            <div class="coin-card">
+                <p>Coins Package 2</p>
+                <p>250 Coins</p>
+                <img src="{{ asset('assets/imgs/coins.png') }}" alt="Profile Image" />
+                <p>Enjoy 250 coins and enhance your experience!</p>
+                <p>Price: $12.99</p>
+                <form action="{{ route('paypal') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="price" value="12.99" />
+                    <button type="submit">Pay with Paypal</button>
+                </form>
+                <form action="{{ route('stripe') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="price" value="12.99" />
+                    <button type="submit">Pay With Stripe</button>
+                </form>
+            </div>
 
-        <div class="coin-card">
-            <p>Coins Package 3</p>
-            <p>500 Coins</p>
-            <img src="{{ asset('assets/imgs/coins.png') }}" alt="Profile Image" />
-            <p>Unlock premium features with 500 coins!</p>
-            <p>Price: $24.99</p>
-            <form action="{{ route('paypal') }}" method="post">
-                @csrf
-                <input type="hidden" name="price" value="24.99" />
-                <button type="submit">Pay with Paypal</button>
-            </form>
-        </div>
+            <div class="coin-card">
+                <p>Coins Package 3</p>
+                <p>500 Coins</p>
+                <img src="{{ asset('assets/imgs/coins.png') }}" alt="Profile Image" />
+                <p>Unlock premium features with 500 coins!</p>
+                <p>Price: $24.99</p>
+                <form action="{{ route('paypal') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="price" value="24.99" />
+                    <button type="submit">Pay with Paypal</button>
+                </form>
+                <form action="{{ route('stripe') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="price" value="24.99" />
+                    <button type="submit">Pay With Stripe</button>
+                </form>
+            </div>
 
-        <div class="coin-card">
-            <p>Coins Package 4</p>
-            <p>1000 Coins</p>
-            <img src="{{ asset('assets/imgs/coins.png') }}" alt="Profile Image" />
-            <p>Maximize your experience with 1000 coins!</p>
-            <p>Price: $44.99</p>
-            <form action="{{ route('paypal') }}" method="post">
-                @csrf
-                <input type="hidden" name="price" value="44.99" />
-                <button type="submit">Pay with Paypal</button>
-            </form>
+            <div class="coin-card">
+                <p>Coins Package 4</p>
+                <p>1000 Coins</p>
+                <img src="{{ asset('assets/imgs/coins.png') }}" alt="Profile Image" />
+                <p>Maximize your experience with 1000 coins!</p>
+                <p>Price: $44.99</p>
+                <form action="{{ route('paypal') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="price" value="44.99" />
+                    <button type="submit">Pay with Paypal</button>
+                </form>
+                <form action="{{ route('stripe') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="price" value="44.99" />
+                    <button type="submit">Pay With Stripe</button>
+                </form>
+            </div>
         </div>
-    </div>
