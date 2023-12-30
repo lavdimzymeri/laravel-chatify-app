@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\vendor\Chatify;
 
+use App\Events\DummyEvent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\ChMessage as Message;
 use App\Models\ChFavorite as Favorite;
+use App\Notifications\UserFollowNotification;
 use Chatify\Facades\ChatifyMessenger as Chatify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -142,6 +144,8 @@ class MessagesController extends Controller
             }
         }
 
+        $userId = $request['id'];
+
         if (!$error->status) {
             $message = Chatify::newMessage([
                 'from_id' => Auth::user()->id,
@@ -161,15 +165,40 @@ class MessagesController extends Controller
                 ]);
             }
         }
+        $this->notify($userId);
 
         // send the response
-        return Response::json([
+        return view('vendor.Chatify.pages.app', [
+            'userId' => $userId,
+        ])->with([
             'status' => '200',
             'error' => $error,
             'message' => Chatify::messageCard(@$messageData),
             'tempID' => $request['temporaryMsgId'],
         ]);
     }
+
+    public function notify($userId)
+    {
+        if (auth()->user()) {
+            // $notifiableUsers = User::all();
+            $notifiableUsers = User::all()->where('id' , $userId);
+
+            // dd($notifiableUsers);
+            foreach ($notifiableUsers as $user) {
+                $user->notify(new UserFollowNotification(auth()->user()));
+            }
+
+            broadcast(new DummyEvent($user->name));
+        }
+        // send the response
+        return view('vendor.Chatify.pages.app', [
+            'userId' => $userId,
+        ])->with([
+            'userId' => $userId,
+            'message' => 'Notifications sent',
+        ]);
+        }
 
     /**
      * fetch [user/group] messages from database

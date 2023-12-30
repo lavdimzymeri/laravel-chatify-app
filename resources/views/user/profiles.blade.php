@@ -7,9 +7,9 @@
     @endphp
     <div class="row">
         @foreach ($users as $user)
-            <div class="col-md-3 mt-2">
+            <div class="col-md-4 mt-3">
                 <div class="card user-card mb-4" style="height: 100%;">
-                    <img src="{{ $user->avatar ? asset('storage/users-avatar/' . $user->avatar) : asset('storage/users-avatar/avatar.png') }}" alt="User Image" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <img src="{{ $user->profile_photo_path ? asset('storage/' . $user->profile_photo_path) : asset('storage/users-avatar/avatar.png') }}" alt="User Image" class="card-img-top" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">{{ $user->name }}</h5>
                         <p class="card-text">{{ $user->username }}</p>
@@ -28,3 +28,4 @@
 <div class="d-flex justify-content-center">
     {{ $users->links() }}
 </div>
+@include('Chatify::layouts.footerLinks')

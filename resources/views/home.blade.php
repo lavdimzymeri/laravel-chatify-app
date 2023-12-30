@@ -8,7 +8,7 @@
             <x-application-logo class="block h-12 w-auto" />
 
             <div class="mt-8 text-2xl">
-                Welcome to your Chatify application!
+                Welcome to your Chatify profile!
             </div>
         </x-panel>
     </x-layout>

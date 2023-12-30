@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DummyEvent;
 use App\Models\Profiles;
 use App\Models\User;
+use App\Notifications\UserFollowNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +31,23 @@ class FindFriendsController extends Controller
         );
     
         return view('user.findFriends', compact('users'));
+    }
+
+    public function notify()
+    {
+        if (auth()->user()) {
+            $notifiableUsers = User::all();
+            // $notifiableUsers = User::all()->where('id' , 2);
+
+            // dd($notifiableUsers);
+            foreach ($notifiableUsers as $user) {
+                $user->notify(new UserFollowNotification(auth()->user()));
+            }
+
+            broadcast(new DummyEvent(auth()->user()->name));
+        }
+
+        return response()->json(['message' => 'Notifications sent']);
     }
 
     public function profiles()

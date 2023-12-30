@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Session;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\vendor\Chatify\MessagesController;
 
 Route::middleware(['splade'])->group(function () {
     Route::spladeWithVueBridge();
@@ -89,6 +90,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/find/friends/page',  [FindFriendsController::class, 'index'])->name('user.find.friends');
     Route::get('/user/find/friends/profiles',  [FindFriendsController::class, 'profilesModerator'])->name('profilesModerator');
     Route::get('/users/login/{user}', [FindFriendsController::class, 'loginAsUser'])->name('loginAsUser');
+
+    // Route::post('/notify', [FindFriendsController::class, 'notify'])->name('notify');
+    Route::post('/notify/{userId}', [MessagesController::class, 'notify'])->name('notify');
+    
     Route::get('/user/find/friends/page/search',  [FindFriendsController::class, 'search'])->name('user.find.friends.search');
     Route::get('/user/profiles',  [FindFriendsController::class, 'profiles'])->name('user.profiles');
     Route::get('/payment/packs',  [PaymentPacksController::class, 'index'])->name('payment.packs');

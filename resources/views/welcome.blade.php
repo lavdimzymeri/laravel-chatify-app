@@ -57,3 +57,4 @@
 </div>
   
 @include('components-project.footer')
+@include('Chatify::layouts.footerLinks')

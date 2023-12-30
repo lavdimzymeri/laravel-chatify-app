@@ -112,7 +112,7 @@
             @foreach ($users as $user)
                 <div class="col-md-4">
                     <div class="user-card">
-                        <img src="{{ $user->avatar ? asset('storage/users-avatar/' . $user->avatar) : asset('storage/users-avatar/avatar.png') }}"
+                        <img src="{{ $user->profile_photo_path ? asset('storage/' . $user->profile_photo_path) : asset('storage/users-avatar/avatar.png') }}"
                             alt="User Image">
                         <div class="user-card-content">
                             <h2>{{ $user->name }}</h2>
@@ -136,3 +136,4 @@
     {{ $users->links() }}
 </div>
 @include('components-project.footer')
+@include('Chatify::layouts.footerLinks')
