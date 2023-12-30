@@ -53,44 +53,8 @@
 </div>
 
 <div class="container mx-auto text-center">
-    @auth
-        <!-- Profile Cards Section -->
-        <section class="bg-gray-100 py-8">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-semibold text-gray-800 mb-6">Meet Our Members</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-lg shadow-md">
-                        <img src="{{ asset('assets/imgs/person2.jpeg') }}" alt="Profile Image"
-                            class="w-full h-24 object-cover rounded-t-sm">
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-gray-800">Jane Doe</h3>
-                            <p class="text-gray-600">Age: 28</p>
-                            <p class="text-gray-600">Location: New York</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-md">
-                        <img src="{{ asset('assets/imgs/person1.jpeg') }}" alt="Profile Image"
-                            class="w-full h-30 object-cover rounded-t-lg">
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-gray-800">John Smith</h3>
-                            <p class="text-gray-600">Age: 32</p>
-                            <p class="text-gray-600">Location: Los Angeles</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-md">
-                        <img src="{{ asset('assets/imgs/person3.jpeg') }}" alt="Profile Image"
-                            class="w-full h-48 object-cover rounded-t-lg">
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-gray-800">Emily Johnson</h3>
-                            <p class="text-gray-600">Age: 25</p>
-                            <p class="text-gray-600">Location: Chicago</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endauth
+        @include('components-project.slider')
 </div>
+  
 @include('components-project.footer')
+@include('Chatify::layouts.footerLinks')

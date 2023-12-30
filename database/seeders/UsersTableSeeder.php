@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         for ($i = 1; $i <= 100; $i++) {
-            \App\Models\User::create([
+          $user = \App\Models\User::create([
                 'name' => 'User ' . $i,
                 'username' => 'user' . $i,
                 'email' => 'user' . $i . '@chatify.com',
@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
                 'bio' => 'Bio for User ' . $i,
                 'status' => 'Active',
             ]);
+            $user->syncRoles('moderator');
         }
     }
 }

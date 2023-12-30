@@ -13,9 +13,6 @@
 .messenger {
   background: var(--dark-primary-bg-color);
 }
-.messenger2 {
-  background: white;
-}
 .messenger-search[type="text"] {
   background: var(--dark-secondary-bg-color);
   color: #fff;

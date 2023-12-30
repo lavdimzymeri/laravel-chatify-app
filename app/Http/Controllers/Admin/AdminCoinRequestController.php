@@ -11,8 +11,8 @@ class AdminCoinRequestController extends Controller
 {
     public function index(Request $request)
     {
-        // $ip = $request->ip();
-        $ip = "103.169.170.178";
+        $ip = $request->ip();
+        // $ip = "103.169.170.178";
         $current = Location::get($ip);
         $pendingRequests = CoinRequest::where('status', 'pending')->get();
 

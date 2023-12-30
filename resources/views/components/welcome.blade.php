@@ -1,15 +1,58 @@
+@vite('resources/js/app.js')
 <div class="p-6 lg:p-8">
     <h1 class="text-2xl font-medium text-gray-900 dark:text-gray-300">
-        Welcome to your SpladePanel!
+        Welcome to Real Dating APP!
     </h1>
     <p class="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
-        Introducing SpladePanel: Your gateway to a streamlined dashboard creation experience. This user-friendly Arabic
-        dashboard boasts essential settings, an appealing layout, and leverages Laravel Splade's prowess. Effortlessly
-        construct fast Single Page Applications (SPAs) using standard Blade templates, enriched by Vue 3 components.
-        Unveil the art of efficient dashboard design with SpladePanel.
+        Introducing Dating App.
     </p>
     <br><br><br>
     <h1 class="text-2xl font-medium text-gray-900 dark:text-gray-300">
         Coins:<br> {{ Auth::user()->coins }} Coins
     </h1>
 </div>
+{{-- @php
+    $userId = 1;
+@endphp --}}
+<div style="background-color: blue">
+    <button id="notifyButton" data-url="{{ route('notify', ['userId' => $userId]) }}">Click Me</button>
+    @foreach (auth()->user()->notifications as $notification)
+    <div>
+        {{ $notification->data['name'] }} started following
+    </div>
+    @endforeach
+    <div id="notificationContainer"></div>
+</div>
+<script>
+    window.onload = function() {
+        document.getElementById('notifyButton').addEventListener('click', function() {
+            var url = document.getElementById('notifyButton').getAttribute('data-url');
+            fetch(url, {
+                    method: 'POST'
+                    , headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        , 'Content-Type': 'application/json'
+                        , 'Accept': 'application/json'
+                    }
+                    , body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+        });
+
+        Echo.channel('dummy-channel')
+            .listen('DummyEvent', (event) => {
+                console.log('DummyEvent received:', event);
+
+                if (event.user_name == '{{ Auth::user()->name }}') {
+                    var notificationContainer = document.getElementById('notificationContainer');
+                    var notificationElement = document.createElement('div');
+                    notificationElement.textContent = event.user_name + ' started following on ' + event.timestamp;
+                    notificationContainer.appendChild(notificationElement);
+                }
+            });
+    };
+
+</script>
+

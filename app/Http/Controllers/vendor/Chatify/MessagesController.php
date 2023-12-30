@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\vendor\Chatify;
 
+use App\Events\DummyEvent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\ChMessage as Message;
 use App\Models\ChFavorite as Favorite;
+use App\Notifications\UserFollowNotification;
 use Chatify\Facades\ChatifyMessenger as Chatify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -42,11 +44,15 @@ class MessagesController extends Controller
      */
     public function index( $id = null)
     {
+        $users = User::all();
+        $users = User::paginate(30);
+        
         $messenger_color = Auth::user()->messenger_color;
         return view('Chatify::pages.app', [
             'id' => $id ?? 0,
             'messengerColor' => $messenger_color ? $messenger_color : Chatify::getFallbackColor(),
             'dark_mode' => Auth::user()->dark_mode < 1 ? 'light' : 'dark',
+            'users' => $users
         ]);
     }
 
@@ -106,11 +112,11 @@ class MessagesController extends Controller
         $user = Auth::user();
 
         if ($user->coins < 1) {
-            // Return a response indicating the alert
+// Return a response indicating the alert
             return redirect()->route('dashboard')->with('error', "You don't have enough coins to send a message. An alert has been shown instead.");
 
         }
-        $user->decrement('coins', 1);
+        $user->decrement('coins', 7);
 
         // if there is attachment [file]
         if ($request->hasFile('file')) {
@@ -138,6 +144,8 @@ class MessagesController extends Controller
             }
         }
 
+        $userId = $request['id'];
+
         if (!$error->status) {
             $message = Chatify::newMessage([
                 'from_id' => Auth::user()->id,
@@ -153,20 +161,44 @@ class MessagesController extends Controller
                 Chatify::push("private-chatify.".$request['id'], 'messaging', [
                     'from_id' => Auth::user()->id,
                     'to_id' => $request['id'],
-                    'message' => Chatify::messageCard($messageData, false)
+                    'message' => Chatify::messageCard($messageData, true)
                 ]);
             }
         }
+        $this->notify($userId);
 
         // send the response
-        return Response::json([
+        return view('vendor.Chatify.pages.app', [
+            'userId' => $userId,
+        ])->with([
             'status' => '200',
             'error' => $error,
             'message' => Chatify::messageCard(@$messageData),
             'tempID' => $request['temporaryMsgId'],
         ]);
-        // dd(Auth::user()->coins);
     }
+
+    public function notify($userId)
+    {
+        if (auth()->user()) {
+            // $notifiableUsers = User::all();
+            $notifiableUsers = User::all()->where('id' , $userId);
+
+            // dd($notifiableUsers);
+            foreach ($notifiableUsers as $user) {
+                $user->notify(new UserFollowNotification(auth()->user()));
+            }
+
+            broadcast(new DummyEvent($user->name));
+        }
+        // send the response
+        return view('vendor.Chatify.pages.app', [
+            'userId' => $userId,
+        ])->with([
+            'userId' => $userId,
+            'message' => 'Notifications sent',
+        ]);
+        }
 
     /**
      * fetch [user/group] messages from database

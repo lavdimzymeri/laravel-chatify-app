@@ -7,7 +7,8 @@
         </div>
     @endif
 
-    <x-splade-form class="space-y-4">
+    <x-splade-form class="space-y-4" id="loginForm" action="{{ route('login') }}" method="post">
+        @csrf
         <x-splade-input id="auth" name="auth" :label="__('main.username') . ' / ' . __('main.email')" required autofocus />
         <x-splade-input id="password" name="password" type="password" :label="__('main.password')" required
             autocomplete="current-password" />
@@ -23,7 +24,15 @@
             @endif
         </div>
         <x-splade-submit :label="__('main.login')" class="w-full"
-            style="  background: rgb(63, 94, 251);
-        background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);" />
+            style="background: rgb(63, 94, 251); background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);"
+            onclick="reloadPage()" />
     </x-splade-form>
+
+    <script>
+        function reloadPage() {
+            setTimeout(function() {
+                location.reload();
+            }, 1500);
+        }
+    </script>
 </x-authentication-card>
